@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.plus.boot.mapper.UserMpper">
+  <resultMap id="BaseResultMap" type="cn.plus.boot.entity.User">
+    <id column="id" property="id" />
+    <result column="username" property="username" />
+    <result column="password" property="password" />
+    <result column="age" property="age" />
+    <result column="sex" property="sex" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, age, sex
+  </sql>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id}
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id}
+  </delete>
+  
+  <insert id="insert" parameterType="cn.plus.boot.entity.User">
+    insert into user (id, username, password, age, sex)
+    values (#{id}, #{username}, #{password}, #{age}, #{sex})
+  </insert>
+  
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  
+</mapper>
